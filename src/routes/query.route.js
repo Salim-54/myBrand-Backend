@@ -1,11 +1,14 @@
 import express from 'express';
 import { getAllQueries, saveQuery, getQueryById } from '../controllers/query.controller';
+import { protect } from '../controllers/auth.controller';
+import { restrictTo } from '../controllers/auth.controller';
+
 
 const router = express.Router();
 
-router.post('/', saveQuery);
-router.get('/', getAllQueries);
-router.get('/:id', getQueryById);
+router.post('/', protect, saveQuery);
+router.get('/', protect,restrictTo('admin'), getAllQueries);
+router.get('/:id', protect,restrictTo('admin'), getQueryById);
 
 
 export default router;

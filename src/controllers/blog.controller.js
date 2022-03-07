@@ -1,26 +1,22 @@
 import { blog } from 'express';
 import Blog from '../database/model/blog.model';
+import AppError from '../utils/appError';
+// import errorController from './error.controller';
+import catchAsync from '../utils/catchAsync'
 
-exports.saveBlog  = async (req, res) => {
 
-    try{
+exports.saveBlog = catchAsync(async (req, res, next) => {
+    const newBlog = await Blog.create(req.body);
 
-        const newBlog = await Blog.create(req.body);
-        // await newBlog.save();
-        res.status(201).json({
-            status: 'Blog was successfully created!',
-            data: {
-            blog: newBlog
-            }
-        });
+  
+    res.status(201).json({
+      status: 'success',
+      data: {
+        blog: newBlog
+      }
+    });
+  });
 
-    } catch (err) {
-        res.status(400).json({
-            status: 'fail',
-            message: err
-        });
-    }
-};
 
 exports.getAllBlogs = async (req, res) => {
     const blogs = await Blog.find();
@@ -33,25 +29,50 @@ exports.getAllBlogs = async (req, res) => {
     });
 };
 
-exports.getBlogById = async (req, res) => {
-    try{
-        
-        const blog = await Blog.findById(req.params.id);
-        res.status(200).json({
-            status: 'success', 
-            data: {
-                blog
-            }
-        });
-        // if(!blog) return res.status(404).json({success: false, message: "Blog not found"}) ;
-    } catch (err) {
-        res.status(400).json({
-            status: 'fail',
-            message: err
-            });
-        }
 
-};
+
+
+
+exports.getBlogById= catchAsync(async (req, res, next) => {
+    const blog = await Blog.findById(req.params.id);
+
+    if (!blog) {
+        return next(new AppError('No blog found with that ID', 404));
+      }
+
+
+    res.status(200).json({
+      status: 'success',
+      data: {
+        blog: blog
+      }
+    });
+  });
+
+
+
+
+// exports.getBlogById = async (req, res) => {
+//     try{
+        
+//         const blog = await Blog.findById(req.params.id);
+//         res.status(200).json({
+//             status: 'success', 
+//             data: {
+//                 blog
+//             }
+//         });
+//         // if (!blog) {
+//         //     return next(new AppError('No blog found with that ID', 404));
+//         //   }
+//     } catch (err) {
+//         res.status(400).json({
+//             status: 'fail',
+//             message: err
+//             });
+//         }
+
+// };
 exports.updateBlogById = async (req, res) => {
     try{
         
