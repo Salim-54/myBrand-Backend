@@ -4,9 +4,7 @@ import Query from '../database/model/query.model';
 exports.saveQuery  = async (req, res) => {
 
     try{
-
         const newQuery = await Query.create(req.body);
-        // await newQuery.save();
         res.status(201).json({
             status: 'Query was successfully created!',
             data: {
@@ -43,13 +41,11 @@ exports.getQueryById = async (req, res) => {
                 query
             }
         });
-        // if(!query) return res.status(404).json({success: false, message: "Query not found"}) ;
     } catch (err) {
         res.status(400).json({
             status: 'fail',
             message: err
             });
         }
-
 }
 

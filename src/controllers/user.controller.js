@@ -1,7 +1,5 @@
 import User from '../database/model/user.model';
-// import AppError from '../utils/appError';
 import catchAsync from '../utils/catchAsync'
-
 
 exports.getAllUsers = catchAsync(async (req, res, next) => {
     const users = await User.find();
