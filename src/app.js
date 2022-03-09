@@ -18,7 +18,7 @@ server.get('/', (req, res) => {
     res.status(200).json({success: true, message: "You successfully on salim's app API"})
 });
 
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 server.listen(port, () => {console.log("Server listening on port "+port)});
 
