@@ -1,13 +1,15 @@
 import express from 'express';
 import { getAllBlogs, saveBlog, getBlogById, updateBlogById, deleteBlogById } from '../controllers/blog.controller';
+import { protect } from '../controllers/auth.controller';
+import { restrictTo } from '../controllers/auth.controller';
 
 const router = express.Router();
 
-router.post('/', saveBlog);
-router.get('/', getAllBlogs);
-router.get('/:id', getBlogById);
-router.patch('/:id', updateBlogById);
-router.delete('/:id', deleteBlogById);
+router.post('/',protect,restrictTo('admin'), saveBlog);
+router.get('/',protect, getAllBlogs);
+router.get('/:id',protect, getBlogById);
+router.patch('/:id',protect,restrictTo('admin'), updateBlogById);
+router.delete('/:id',protect,restrictTo('admin'), deleteBlogById);
 
 
 
