@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-mongoose.connect('mongodb://localhost:27017/Queries-collection', {
+mongoose.connect('mongodb://localhost:27017/ATLP-BRAND', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 })

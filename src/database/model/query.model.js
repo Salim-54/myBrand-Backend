@@ -3,15 +3,21 @@ import mongoose from "mongoose";
 const QuerySchema = new mongoose.Schema({
     fullName: {
         type: String,
-        required: true
+        required: true,
+        trim: true,
+        uppercase: true
     },
     telNumber: {
         type: String,
-        required: true
+        required: true,
+        trim:true
     },
     email: {
         type: String,
-        required: true
+        required: true,
+        unique: true,
+        trim : true,
+        lowercase: true
     },
     message: {
         type: String,

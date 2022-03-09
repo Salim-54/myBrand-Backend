@@ -1,6 +1,8 @@
 import "./database";
 import express from 'express';
 import queriesRoutes from './routes/query.route';
+import blogsRoutes from './routes/blog.route';
+
 
 
 const server = express();
@@ -13,6 +15,8 @@ server.get('/', (req, res) => {
 server.use(express.json());
 
 server.use('/api/v1/queries', queriesRoutes);
+server.use('/api/v1/blogs', blogsRoutes);
+
 
 const port = 3000;
 

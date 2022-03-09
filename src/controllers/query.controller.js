@@ -1,15 +1,55 @@
 import { query } from 'express';
 import Query from '../database/model/query.model';
 
-export const saveQuery  = async (req, res) => {
-    const query = req.body;
-    const newQuery = new Query(query);
-    await newQuery.save();
-    res.status(201).json({success: true, data: newQuery});
-}
+exports.saveQuery  = async (req, res) => {
 
-export const getAllQueries = async (req, res) => {
+    try{
+
+        const newQuery = await Query.create(req.body);
+        // await newQuery.save();
+        res.status(201).json({
+            status: 'Query was successfully created!',
+            data: {
+            query: newQuery
+            }
+        });
+
+    } catch (err) {
+        res.status(400).json({
+            status: 'fail',
+            message: err
+        });
+    }
+};
+
+exports.getAllQueries = async (req, res) => {
     const queries = await Query.find();
-    res.status(200).json({success: true, data: queries})
+    res.status(200).json({
+        status: 'success',
+        results: queries.length, 
+        data: {
+            queries
+        }
+    });
+};
+
+exports.getQueryById = async (req, res) => {
+    try{
+        
+        const query = await Query.findById(req.params.id);
+        res.status(200).json({
+            status: 'success', 
+            data: {
+                query
+            }
+        });
+        // if(!query) return res.status(404).json({success: false, message: "Query not found"}) ;
+    } catch (err) {
+        res.status(400).json({
+            status: 'fail',
+            message: err
+            });
+        }
+
 }
 
