@@ -6,7 +6,7 @@ import { restrictTo } from '../controllers/auth.controller';
 const router = express.Router();
 
 router.post('/',protect,restrictTo('admin'), saveBlog);
-router.get('/',protect, getAllBlogs);
+router.get('/', getAllBlogs);
 router.get('/:id',protect, getBlogById);
 router.patch('/:id',protect,restrictTo('admin'), updateBlogById);
 router.delete('/:id',protect,restrictTo('admin'), deleteBlogById);
