@@ -49,3 +49,22 @@ exports.getQueryById = async (req, res) => {
         }
 }
 
+
+
+
+exports.deleteQueryById = async (req, res) => {
+    try{
+        
+        const query = await Query.findByIdAndDelete(req.params.id);
+        res.status(200).json({
+            status: 'success', 
+            message : "Successfully deleted the query!!"
+        });
+    } catch (err) {
+        res.status(400).json({
+            status: 'fail',
+            message: err
+            });
+        }
+}
+

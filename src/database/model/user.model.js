@@ -19,7 +19,7 @@ const userSchema = new mongoose.Schema({
   email: {
     type: String,
     required: [true, 'Provide your email'],
-    unique: true,
+    // unique: true,
     lowercase: true,
     validate: [validator.isEmail, 'Provide a valid email']
   },
@@ -28,18 +28,18 @@ const userSchema = new mongoose.Schema({
     required: [true, 'Please provide a password'],
     minlength: 8,
     select: false
-  },
-  passwordConfirm: {
-    type: String,
-    required: [true, 'Please confirm your password'],
-    validate: {
-      // This only works on CREATE and SAVE!!!
-      validator: function(el) {
-        return el === this.password;
-      },
-      message: 'Passwords are not the same!'
-    }
-  }
+   },
+  // passwordConfirm: {
+  //   type: String,
+  //   required: [true, 'Please confirm your password'],
+  //   validate: {
+  //     // This only works on CREATE and SAVE!!!
+  //     validator: function(el) {
+  //       return el === this.password;
+  //     },
+  //     message: 'Passwords are not the same!'
+  //   }
+  // }
 
 });
 
@@ -50,8 +50,8 @@ userSchema.pre('save', async function(next) {
   this.password = await bcrypt.hash(this.password, 12);
 
   //delete pw
-  this.passwordConfirm = undefined;
-  next();
+  // this.passwordConfirm = undefined;
+  // next();
 
 });
 
