@@ -7,9 +7,7 @@ exports.saveQuery  = async (req, res) => {
         const newQuery = await Query.create(req.body);
         res.status(201).json({
             status: 'Query was successfully created!',
-            data: {
-            query: newQuery
-            }
+            message:`Thank you ${newQuery.fullName}, Your Message has been sent successfully!`
         });
 
     } catch (err) {
