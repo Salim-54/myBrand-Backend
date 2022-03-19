@@ -1,14 +1,34 @@
 import { blog } from 'express';
 import Blog from '../database/model/blog.model';
 import AppError from '../utils/appError';
+import fileUpload from '../utils/fileUpload';
+
 // import errorController from './error.controller';
 import catchAsync from '../utils/catchAsync'
 
 
 exports.saveBlog = catchAsync(async (req, res, next) => {
-    const newBlog = await Blog.create(req.body);
 
-  
+    let blog = (req.body)
+
+
+    let hasBlog  = await Blog.findOne({title: req.body.title});
+    if (hasBlog) {
+        return res.status(400).json({ error: true, message: "There is already a blog like this!!" });
+    }
+
+
+    if (req.file) {
+        req.body.image = await fileUpload(req);
+    } else {
+        req.body.image =
+            "https://res.cloudinary.com/salim-atlp-brand/image/upload/v1647272711/article_vmtmzu.png";
+    }
+
+let newBlog = await new Blog(blog);
+newBlog.save();
+
+
     res.status(201).json({
       status: 'success',
       data: {
@@ -43,9 +63,7 @@ exports.getBlogById= catchAsync(async (req, res, next) => {
 
     res.status(200).json({
       status: 'success',
-      data: {
-        blog: blog
-      }
+      data: blog
     });
   });
 

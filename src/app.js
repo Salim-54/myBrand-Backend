@@ -8,6 +8,11 @@ import queriesRoutes from './routes/query.route';
 import blogsRoutes from './routes/blog.route';
 import userRoutes from './routes/user.route';
 import commentsRoutes from './routes/comments.route';
+import subcriberRoutes from './routes/subcriber.route';
+import swaggerUi from "swagger-ui-express";
+import swaggerDoc from "./api.json";
+
+
 
 
 import res from "express/lib/response";
@@ -20,12 +25,6 @@ server.get('/', (req, res) => {
     res.status(200).json({success: true, message: "You successfully on salim's app API"})
 });
 
-const port = process.env.PORT || 3000;
-
-server.listen(port, () => {console.log("Server listening on port "+port)});
-
-
-
 server.use(express.json());
 
 server.use((req, res, next) => {
@@ -37,7 +36,12 @@ server.use('/api/v1/queries', queriesRoutes);
 server.use('/api/v1/blogs', blogsRoutes);
 server.use('/api/v1/users', userRoutes);
 server.use('/api/v1/comments', commentsRoutes);
-
+server.use('/api/v1/subscribe', subcriberRoutes);
+server.use(
+    "/api-docs",
+    swaggerUi.serve,
+    swaggerUi.setup(swaggerDoc, { explorer: true })
+);
 
 
 server.all('*', (req, res, next) => {
@@ -45,4 +49,7 @@ server.all('*', (req, res, next) => {
 });
 
   server.use(globalErrorHandler);
+
+
+  export default server;
  

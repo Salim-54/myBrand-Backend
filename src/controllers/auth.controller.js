@@ -17,13 +17,26 @@ const signToken = id => {
 // SIGNING UP NEW USER WITH TOKEN TO LOGIN IMMEDIATELY
 
 exports.signup = catchAsync(async (req, res, next) => {
-    const newUser = await User.create({
-        name: req.body.name,
-        role: req.body.role,
-        email: req.body.email,
-        password: req.body.password,
-        passwordConfirm: req.body.passwordConfirm
-    });
+
+
+  let user = {
+
+    email:req.body.email,
+    password:req.body.password,
+    name: req.body.name,
+    role: req.body.role
+
+  };
+
+
+  let oldUser  = await User.findOne({ email: req.body.email });
+  if (oldUser) {
+      return res.status(400).json({ error: true, message: "You have already registered please Login" });
+  }
+
+
+    const newUser = await new User(user);
+    newUser.save();
 
     const token = signToken(newUser._id);
 

@@ -7,14 +7,13 @@ import { restrictTo } from '../controllers/auth.controller';
 
 const router = express.Router();
 
-router.get('/', protect, protect,restrictTo('admin'), getAllUsers);
-router.get('/:id', protect, protect,restrictTo('admin'), getUserById);
+router.get('/', protect, restrictTo('admin'), getAllUsers);
+router.get('/:id', protect, restrictTo('admin'), getUserById);
 
 // AUTH
 
 router.post('/signup', signup);
 router.post('/login', login);
-
 
 
 export default router;
