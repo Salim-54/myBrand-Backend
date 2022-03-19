@@ -1,3 +1,5 @@
+import cors from "cors";
+import morgan from "morgan";
 import "./database";
 import 'dotenv/config';
 
@@ -14,12 +16,14 @@ import swaggerDoc from "./api.json";
 
 
 
-
 import res from "express/lib/response";
 
 
 
 const server = express();
+server.use(cors());
+server.use(morgan('dev'));
+
 
 server.get('/', (req, res) => {
     res.status(200).json({success: true, message: "You successfully on salim's app API"})
