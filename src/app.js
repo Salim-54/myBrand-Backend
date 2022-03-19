@@ -7,6 +7,8 @@ import express from 'express';
 import queriesRoutes from './routes/query.route';
 import blogsRoutes from './routes/blog.route';
 import userRoutes from './routes/user.route';
+import commentsRoutes from './routes/comments.route';
+
 
 import res from "express/lib/response";
 
@@ -34,6 +36,8 @@ server.use((req, res, next) => {
 server.use('/api/v1/queries', queriesRoutes);
 server.use('/api/v1/blogs', blogsRoutes);
 server.use('/api/v1/users', userRoutes);
+server.use('/api/v1/comments', commentsRoutes);
+
 
 
 server.all('*', (req, res, next) => {

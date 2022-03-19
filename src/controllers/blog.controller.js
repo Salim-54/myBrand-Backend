@@ -100,9 +100,9 @@ exports.deleteBlogById = async (req, res) => {
     try{
         await Blog.findByIdAndDelete(req.params.id);
 
-        res.status(204).json({
+        res.status(200).json({
             status: 'success', 
-            data: null
+            message: `blog with id: ${req.params.id} is deleted successfully!!`
         });
         // if(!blog) return res.status(404).json({success: false, message: "Blog not found"}) ;
     } catch (err) {
