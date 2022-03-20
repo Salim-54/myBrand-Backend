@@ -69,28 +69,6 @@ exports.getBlogById= catchAsync(async (req, res, next) => {
 
 
 
-
-// exports.getBlogById = async (req, res) => {
-//     try{
-        
-//         const blog = await Blog.findById(req.params.id);
-//         res.status(200).json({
-//             status: 'success', 
-//             data: {
-//                 blog
-//             }
-//         });
-//         // if (!blog) {
-//         //     return next(new AppError('No blog found with that ID', 404));
-//         //   }
-//     } catch (err) {
-//         res.status(400).json({
-//             status: 'fail',
-//             message: err
-//             });
-//         }
-
-// };
 exports.updateBlogById = async (req, res) => {
     try{
         
