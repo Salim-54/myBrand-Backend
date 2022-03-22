@@ -5,6 +5,11 @@ const BlogSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    category:{
+        type: String,
+        enum: ['code', 'machine', 'life'],
+        default: 'code'
+      },
     image: {
         type: String,
         required: true
