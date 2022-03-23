@@ -43,9 +43,7 @@ exports.getAllBlogs = async (req, res) => {
     res.status(200).json({
         status: 'success',
         results: blogs.length, 
-        data: {
-            blogs
-        }
+        data: blogs
     });
 };
 
@@ -54,7 +52,7 @@ exports.getAllBlogs = async (req, res) => {
 
 
 exports.getBlogById= catchAsync(async (req, res, next) => {
-    const blog = await Blog.findById(req.params.id);
+    const blog = await Blog.findById(req.params.id).populate("comments");
 
     if (!blog) {
         return next(new AppError('No blog found with that ID', 404));
