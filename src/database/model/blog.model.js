@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-
+import Comment from "./comments.model";
 const BlogSchema = new mongoose.Schema({
     title: {
         type: String,
@@ -25,7 +25,7 @@ const BlogSchema = new mongoose.Schema({
 	comments: [
 		{
 			type: mongoose.Schema.Types.ObjectId,
-			ref: "Comment",
+			ref: "Comment"
 		},
 	],
     sendDate: {

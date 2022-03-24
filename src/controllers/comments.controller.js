@@ -6,11 +6,12 @@ exports.saveComment = async (req, res, next) => {
 
 
   const blogId = req.params.id;
+  const commentedOn = await Blog.findById(blogId)
     const newComment = await Comment.create({
 
       name: req.body.name,
       commentBody: req.body.commentBody,
-      blogPost: blogId,
+      blogPost: commentedOn.title,
     });
 
 
