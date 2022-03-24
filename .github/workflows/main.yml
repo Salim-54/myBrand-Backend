@@ -9,11 +9,11 @@ on:
 
   push:
 
-    branches: [ master ]
+    branches: [ develop ]
 
   pull_request:
 
-    branches: [ master ]
+    branches: [ develop ]
 
 
 
@@ -39,13 +39,13 @@ jobs:
 
     env:
 
-      PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+      JWT_SECRET: ${{ secrets.JWT_SECRET }}
 
       NODE_ENV: ${{ secrets.NODE_ENV }}
 
-      port: ${{ secrets.port }}
+      PORT: ${{ secrets.PORT }}
 
-      TEST_DB: ${{ secrets.TEST_DB }}
+      MONGODB_URL: ${{ secrets.MONGODB_URL }}
 
     steps:
 
