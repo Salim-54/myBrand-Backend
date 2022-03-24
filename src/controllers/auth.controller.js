@@ -43,6 +43,9 @@ exports.signup = catchAsync(async (req, res, next) => {
     res.status(201).json({
         status: 'success',
         token,
+        data: {
+          role : newUser.role,
+        },
         message: `Thank you ${newUser.name}, your account have been created successfully!!`
     })
 });
@@ -67,7 +70,10 @@ exports.login = catchAsync(async (req, res, next) => {
     const token = signToken(user._id);
     res.status(200).json({
         status: 'success',
-        token
+        token,
+        data: {
+          role: user.role,
+        }
     });
 
   });

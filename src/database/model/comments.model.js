@@ -9,6 +9,10 @@ const CommentSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    blogPost: {
+        type: String,
+        required: true
+    },
     sendDate: {
         type: Date,
         default: new Date()
