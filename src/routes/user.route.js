@@ -7,7 +7,7 @@ import { restrictTo } from '../controllers/auth.controller';
 
 const router = express.Router();
 
-router.get('/', protect, restrictTo('admin'), getAllUsers);
+router.get('/', protect,  getAllUsers);
 router.get('/:id', protect, restrictTo('admin'), getUserById);
 
 // AUTH

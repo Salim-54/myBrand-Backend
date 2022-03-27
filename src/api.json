@@ -194,6 +194,64 @@
                 }
             }
         },
+        "/api/v1/comments": {
+            "get": {
+                "tags": ["Comments"],
+                "summary": "Get all comments",
+                "description": "get all comments",
+                "operationId": "get all comments",
+                "responses": {
+                    "201": {
+                        "description": "get all comments"
+                    }
+                },
+                "security": [{
+                    "Bearer": []
+                }]
+            },
+            "post": {
+                "tags": ["Comments"],
+                "summary": "Create a new comment",
+                "description": "New comment",
+                "operationId": "New comment",
+                "parameters": [{
+                    "in": "body",
+                    "name": "body",
+                    "description": "Resource payload",
+                    "required": true,
+                    "schema": {
+                        "type": "object",
+                        "properties": {
+                            "name": {
+                                "type": "string"
+                            },
+                            "commentBody": {
+                                "type": "string"
+                            },
+                            "sendDate": {
+                                "type": "string"
+                            },
+                            "_id": {
+                                "type": "string"
+                            }
+                            ,
+                            "blogPost": {
+                                "type": "string"
+                            }
+                        },
+                        "required": ["name", "commentBody", "blogPost"]
+                    }
+                }],
+                "security": [{
+                    "Bearer": []
+                }],
+                "responses": {
+                    "201": {
+                        "description": "blog created"
+                    }
+                }
+            }
+        },
         "/api/v1/blogs": {
             "get": {
                 "tags": ["Blogs"],

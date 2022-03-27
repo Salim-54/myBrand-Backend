@@ -10,7 +10,8 @@ const QuerySchema = new mongoose.Schema({
     telNumber: {
         type: String,
         required: true,
-        trim:true
+        trim:true,
+        default: '0788888888'
     },
     email: {
         type: String,
