@@ -30,6 +30,7 @@ exports.subscribeToBlog = catchAsync(async (req, res, next) => {
             subscriber: newSubscriber
         }
     })
+
 });
 
 exports.getAllSubscribers = async (req, res) => {
@@ -37,7 +38,9 @@ exports.getAllSubscribers = async (req, res) => {
 	res.status(200).json({
 		results:subscribers.length,
 		success: true, 
-		data: subscribers, 
+		data: {
+			subscribers,
+		}
 	});
 };
 
