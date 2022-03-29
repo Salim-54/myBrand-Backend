@@ -45,6 +45,8 @@ exports.signup = catchAsync(async (req, res, next) => {
         token,
         data: {
           role : newUser.role,
+          name : newUser.name,
+          email: newUser.email,
         },
         message: `Thank you ${newUser.name}, your account have been created successfully!!`
     })
@@ -73,6 +75,8 @@ exports.login = catchAsync(async (req, res, next) => {
         token,
         data: {
           role: user.role,
+          name: user.name,
+          email: user.email,
         }
     });
 
@@ -125,6 +129,3 @@ exports.login = catchAsync(async (req, res, next) => {
       next();
     };
   };
-
-
-
